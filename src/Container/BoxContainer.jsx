@@ -1,14 +1,16 @@
 import React, { useState } from "react";
 import { quiz } from "../Helper/quiz";
 import QuestionBox from "../Components/QuestionBox";
-
+import Result from "../Components/Result";
 const BoxContainer = () => {
   //TODO: will keep all question inside redux state
-  const [next, setNext] = useState(true);
+  const [next, setNext] = useState(0);
   return (
     <div>
-      {quiz.map(
-        (quiz) => next && <QuestionBox quiz={quiz} setNext={setNext} />
+      {next < quiz.length ? (
+        <QuestionBox quiz={quiz[next]} setNext={setNext} />
+      ) : (
+        <Result />
       )}
     </div>
   );

@@ -45,7 +45,7 @@ const AnswersWrapper = styled.div`
   justify-content: center;
 `;
 
-const QuestionBox = ({ quiz }) => {
+const QuestionBox = ({ quiz, setNext }) => {
   const { question, options } = quiz;
 
   return (
@@ -55,7 +55,9 @@ const QuestionBox = ({ quiz }) => {
       </Wrapper>
       <AnswersWrapper>
         {options.map((option) => (
-          <Button>{option.Text}</Button>
+          <Button onClick={() => setNext((next) => next + 1)}>
+            {option.Text}
+          </Button>
         ))}
       </AnswersWrapper>
     </ParentDiv>
