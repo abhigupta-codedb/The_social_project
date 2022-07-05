@@ -2,7 +2,7 @@ import "./App.css";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-const ChidldDiv = styled.button`
+const Button = styled.button`
   /* Adapt the colors based on primary prop */
   background: ${(props) => (props.primary ? "palevioletred" : "white")};
   color: ${(props) => (props.primary ? "white" : "palevioletred")};
@@ -43,9 +43,9 @@ function App() {
       <Wrapper>
         <Title>THE_SOCIAL_PROJECT</Title>
       </Wrapper>
-      <ChidldDiv primary onClick={() => navigate("/quiz")}>
+      <Button primary onClick={() => navigate("/quiz")}>
         NEXT
-      </ChidldDiv>
+      </Button>
     </ParentDiv>
   );
 }

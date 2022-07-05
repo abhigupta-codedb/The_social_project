@@ -7,8 +7,7 @@ const BoxContainer = () => {
   const [next, setNext] = useState(true);
   return (
     <div>
-      BoxContainer
-      {quiz.forEach(
+      {quiz.map(
         (quiz) => next && <QuestionBox quiz={quiz} setNext={setNext} />
       )}
     </div>
