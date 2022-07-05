@@ -14,6 +14,9 @@ const Button = styled.button`
   border-radius: 3px;
   &:hover {
     cursor: pointer;
+    background: ${(props) =>
+      props.primary ? "palevioletred" : "palevioletred"};
+    color: ${(props) => (props.primary ? "white" : "white")};
   }
 `;
 
@@ -43,9 +46,7 @@ function App() {
       <Wrapper>
         <Title>THE_SOCIAL_PROJECT</Title>
       </Wrapper>
-      <Button primary onClick={() => navigate("/quiz")}>
-        NEXT
-      </Button>
+      <Button onClick={() => navigate("/quiz")}>Click here!</Button>
     </ParentDiv>
   );
 }

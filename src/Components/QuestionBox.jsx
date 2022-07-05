@@ -13,7 +13,7 @@ const Wrapper = styled.section`
 `;
 
 const ParentDiv = styled.div`
-  height: 100vh;
+  height: 60vh;
   display: flex;
   align-items: center;
   justify-content: center;
