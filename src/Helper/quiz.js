@@ -62,4 +62,25 @@ export const quiz = [
       },
     ],
   },
+  {
+    question: "Are you feeling/felt motivated in past week?",
+    options: [
+      {
+        Text: "Always",
+        value: 4,
+      },
+      {
+        Text: "Somtimes",
+        value: 3,
+      },
+      {
+        Text: "Rarely",
+        value: 2,
+      },
+      {
+        Text: "Never",
+        value: 1,
+      },
+    ],
+  },
 ];

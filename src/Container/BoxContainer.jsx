@@ -43,7 +43,7 @@ const Text = styled.h5`
 `;
 
 const CounterText = styled(Text)`
-  font-size: 2em;
+  font-size: ${(props) => (props.result ? "1.5em" : "2em")};
 `;
 const BoxContainer = () => {
   //TODO: will keep all question inside redux state
@@ -51,12 +51,13 @@ const BoxContainer = () => {
   const [value, setValue] = useState(0);
 
   const progress = (next * 100) / quiz.length;
+  const counterValue = next + "/" + quiz.length;
   return (
     <Page>
       <Header>
         <Counter>
-          <CounterText>
-            {next}/{quiz.length}
+          <CounterText result={next >= quiz.length}>
+            {next < quiz.length ? counterValue : "Result"}
           </CounterText>
         </Counter>
         <Logo>
