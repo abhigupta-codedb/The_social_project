@@ -4,7 +4,7 @@ import { Title, Wrapper } from "./QuestionBox";
 const Result = ({ value }) => {
   return (
     <Wrapper>
-      <Title>Result: {value}</Title>
+      <Title>Your score - {value}</Title>
     </Wrapper>
   );
 };

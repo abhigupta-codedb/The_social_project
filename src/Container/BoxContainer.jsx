@@ -52,25 +52,26 @@ const BoxContainer = () => {
 
   const progress = (next * 100) / quiz.length;
   const counterValue = next + "/" + quiz.length;
+  const nextCondition = next < quiz.length;
   return (
     <Page>
       <Header>
         <Counter>
           <CounterText result={next >= quiz.length}>
-            {next < quiz.length ? counterValue : "Result"}
+            {nextCondition ? counterValue : "Result"}
           </CounterText>
         </Counter>
         <Logo>
           <Text>THE_SOCIAL_PROJECT</Text>
         </Logo>
       </Header>
-      {next < quiz.length ? (
+      {nextCondition ? (
         <QuestionBox quiz={quiz[next]} setNext={setNext} setValue={setValue} />
       ) : (
         <Result value={value} />
       )}
       <Footer>
-        <ProgressBar progress={progress.toFixed(1)} />
+        {nextCondition && <ProgressBar progress={progress.toFixed(1)} />}
       </Footer>
     </Page>
   );
