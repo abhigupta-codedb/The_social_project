@@ -43,26 +43,30 @@ const Text = styled.h5`
 `;
 
 const CounterText = styled(Text)`
-  font-size: 4em;
+  font-size: 2em;
 `;
 const BoxContainer = () => {
   //TODO: will keep all question inside redux state
   const [next, setNext] = useState(0);
+  const [value, setValue] = useState(0);
+
   const progress = (next * 100) / quiz.length;
   return (
     <Page>
       <Header>
         <Counter>
-          <CounterText>{next + 1}</CounterText>
+          <CounterText>
+            {next}/{quiz.length}
+          </CounterText>
         </Counter>
         <Logo>
           <Text>THE_SOCIAL_PROJECT</Text>
         </Logo>
       </Header>
       {next < quiz.length ? (
-        <QuestionBox quiz={quiz[next]} setNext={setNext} />
+        <QuestionBox quiz={quiz[next]} setNext={setNext} setValue={setValue} />
       ) : (
-        <Result />
+        <Result value={value} />
       )}
       <Footer>
         <ProgressBar progress={progress.toFixed(1)} />

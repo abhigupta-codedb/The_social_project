@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const Title = styled.h1`
+let count = 0;
+export const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
 `;
 
-const Wrapper = styled.section`
+export const Wrapper = styled.section`
   padding: 4em;
   background: papayawhip;
 `;
@@ -22,6 +23,7 @@ const ParentDiv = styled.div`
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
+  key: ${(prop) => prop.key + 1}
   background: ${(props) => (props.primary ? "palevioletred" : "white")};
   color: ${(props) => (props.primary ? "white" : "palevioletred")};
   width: 35%;
@@ -45,7 +47,7 @@ const AnswersWrapper = styled.div`
   justify-content: center;
 `;
 
-const QuestionBox = ({ quiz, setNext }) => {
+const QuestionBox = ({ quiz, setNext, setValue }) => {
   const { question, options } = quiz;
 
   return (
@@ -55,7 +57,13 @@ const QuestionBox = ({ quiz, setNext }) => {
       </Wrapper>
       <AnswersWrapper>
         {options.map((option) => (
-          <Button onClick={() => setNext((next) => next + 1)}>
+          <Button
+            onClick={(e) => {
+              setNext((next) => next + 1);
+              setValue((value) => value + option.value);
+            }}
+            key={count++}
+          >
             {option.Text}
           </Button>
         ))}
