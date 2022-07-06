@@ -22,15 +22,28 @@ const Counter = styled.span`
   width: 100px;
   background-color: papayawhip;
   border-radius: 50%;
-  display: inline-block;
+  display: inline-flex;
   float: left;
+  justify-content: center;
+  align-items: center;
 `;
 const Logo = styled.span`
   height: 100px;
-  width: 100px;
+  width: 150px;
   background-color: papayawhip;
-  display: inline-block;
+  display: inline-flex;
   float: right;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Text = styled.h5`
+  color: palevioletred;
+  text-align: center;
+`;
+
+const CounterText = styled(Text)`
+  font-size: 4em;
 `;
 const BoxContainer = () => {
   //TODO: will keep all question inside redux state
@@ -39,8 +52,12 @@ const BoxContainer = () => {
   return (
     <Page>
       <Header>
-        <Counter />
-        <Logo />
+        <Counter>
+          <CounterText>{next + 1}</CounterText>
+        </Counter>
+        <Logo>
+          <Text>THE_SOCIAL_PROJECT</Text>
+        </Logo>
       </Header>
       {next < quiz.length ? (
         <QuestionBox quiz={quiz[next]} setNext={setNext} />
