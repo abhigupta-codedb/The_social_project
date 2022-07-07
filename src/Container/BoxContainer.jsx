@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { quiz } from "../Helper/quiz";
+import { useSelector, useDispatch } from "react-redux/es/exports";
 import QuestionBox from "../Components/QuestionBox";
 import Result from "../Components/Result";
 import styled from "styled-components";
 import ProgressBar from "../Components/ProgressBar";
+import { loadQuestions } from "../Slices/Group1";
 
 const Header = styled.div`
   height: 20vh;
@@ -45,19 +47,29 @@ const Text = styled.h5`
 const CounterText = styled(Text)`
   font-size: ${(props) => (props.result ? "1.5em" : "2em")};
 `;
+
+let dispatchFired = false;
 const BoxContainer = () => {
-  //TODO: will keep all question inside redux state
   const [next, setNext] = useState(0);
   const [value, setValue] = useState(0);
+  const dispatch = useDispatch();
+  const allQuestions = useSelector((state) => state.Group1.questions);
 
-  const progress = (next * 100) / quiz.length;
-  const counterValue = next + "/" + quiz.length;
-  const nextCondition = next < quiz.length;
+  useEffect(() => {
+    if (!dispatchFired) {
+      dispatch(loadQuestions(quiz));
+      dispatchFired = true;
+    }
+  }, [dispatch]);
+
+  const progress = (next * 100) / allQuestions.length;
+  const counterValue = next + "/" + allQuestions.length;
+  const nextCondition = next < allQuestions.length;
   return (
     <Page>
       <Header>
         <Counter>
-          <CounterText result={next >= quiz.length}>
+          <CounterText result={next >= allQuestions.length ? "true" : "false"}>
             {nextCondition ? counterValue : "Result"}
           </CounterText>
         </Counter>
@@ -66,7 +78,11 @@ const BoxContainer = () => {
         </Logo>
       </Header>
       {nextCondition ? (
-        <QuestionBox quiz={quiz[next]} setNext={setNext} setValue={setValue} />
+        <QuestionBox
+          quiz={allQuestions[next]}
+          setNext={setNext}
+          setValue={setValue}
+        />
       ) : (
         <Result value={value} />
       )}
