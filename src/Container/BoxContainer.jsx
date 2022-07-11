@@ -6,6 +6,7 @@ import Result from "../Components/Result";
 import styled from "styled-components";
 import ProgressBar from "../Components/ProgressBar";
 import { loadQuestions } from "../Slices/Group1";
+import { useNavigate } from "react-router-dom";
 
 const Header = styled.div`
   height: 20vh;
@@ -37,6 +38,9 @@ const Logo = styled.span`
   float: right;
   justify-content: center;
   align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Text = styled.h5`
@@ -53,6 +57,7 @@ const BoxContainer = () => {
   const [next, setNext] = useState(0);
   const [value, setValue] = useState(0);
   const dispatch = useDispatch();
+  let navigate = useNavigate();
   const allQuestions = useSelector((state) => state.Group1.questions);
 
   useEffect(() => {
@@ -73,8 +78,8 @@ const BoxContainer = () => {
             {nextCondition ? counterValue : "Result"}
           </CounterText>
         </Counter>
-        <Logo>
-          <Text>THE_SOCIAL_PROJECT</Text>
+        <Logo onClick={() => navigate("/")}>
+          <Text>{nextCondition ? "THE_SOCIAL_PROJECT" : "GO BACK"}</Text>
         </Logo>
       </Header>
       {nextCondition ? (
