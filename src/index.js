@@ -7,8 +7,17 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./Store/store";
+import { debounce } from "lodash";
+import { saveState } from "./browser-storage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
+store.subscribe(
+  debounce(() => {
+    saveState(store.getState());
+  }, 100)
+);
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
