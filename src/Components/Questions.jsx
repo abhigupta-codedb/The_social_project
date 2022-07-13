@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import AddQuestions from "./AddQuestions";
+import AllQuestions from "./AllQuestions";
 
 const Header = styled.div`
   height: 10vh;
@@ -33,13 +36,29 @@ const BackButton = styled(Button)`
 
 const Questions = () => {
   let navigate = useNavigate();
+  const [addQues, setQues] = useState(false);
+  const [viewQues, setViewQues] = useState(false);
+
+  const AddQuesHandler = () => {
+    setQues(true);
+    setViewQues(false);
+  };
+
+  const AllQuesHandler = () => {
+    setViewQues(true);
+    setQues(false);
+  };
 
   return (
-    <Header>
-      <Button>View all questions</Button>
-      <Button>Add questions</Button>
-      <BackButton onClick={() => navigate("/")}>Go back</BackButton>
-    </Header>
+    <>
+      <Header>
+        <Button onClick={AllQuesHandler}>View all questions</Button>
+        <Button onClick={AddQuesHandler}>Add questions</Button>
+        <BackButton onClick={() => navigate("/")}>Go back</BackButton>
+      </Header>
+      {addQues && <AddQuestions />}
+      {viewQues && <AllQuestions />}
+    </>
   );
 };
 
