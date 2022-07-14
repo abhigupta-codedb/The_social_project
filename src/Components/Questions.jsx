@@ -12,7 +12,7 @@ const Header = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
+export const Button = styled.button`
   /* Adapt the colors based on primary prop */
   background: ${(props) => (props.primary ? "palevioletred" : "white")};
   color: ${(props) => (props.primary ? "white" : "palevioletred")};

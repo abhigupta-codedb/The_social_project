@@ -31,8 +31,8 @@ const Container = styled.div`
   flex-direction: column;
 `;
 const Wrapper = styled.div`
-  width: 50vw;
-  height: 50vh;
+  width: 60vw;
+  height: 70vh;
   background: papayawhip;
   border: 1px solid black;
 `;
@@ -47,7 +47,7 @@ const Form = styled(Wrapper)`
 `;
 
 const TextArea = styled.textarea`
-  width: 50%;
+  width: 60%;
   height: 5vh;
   border: 2px solid palevioletred;
   border-radius: 3px;
@@ -68,8 +68,8 @@ const Text = styled.span`
   width: 30%;
 `;
 
-const Dropdown = () => (
-  <select>
+const Dropdown = (getVal, setVal) => (
+  <select value={getVal} onChange={(e) => setVal(e.target.value)}>
     <option value={1}>1</option>
     <option value={2}>2</option>
     <option value={3}>3</option>
@@ -88,6 +88,10 @@ const AddQuestions = () => {
   const [getop2, setop2] = useState("");
   const [getop3, setop3] = useState("");
   const [getop4, setop4] = useState("");
+  const [getval1, setval1] = useState(1);
+  const [getval2, setval2] = useState(1);
+  const [getval3, setval3] = useState(1);
+  const [getval4, setval4] = useState(1);
 
   const submitHandler = () => {
     if (!getQues || !getop1 || !getop2 || !getop3 || !getop4) {
@@ -98,19 +102,19 @@ const AddQuestions = () => {
         options: [
           {
             Text: getop1,
-            value: 4,
+            value: +getval1,
           },
           {
             Text: getop2,
-            value: 3,
+            value: +getval2,
           },
           {
             Text: getop3,
-            value: 2,
+            value: +getval3,
           },
           {
             Text: getop4,
-            value: 1,
+            value: +getval4,
           },
         ],
       };
@@ -133,7 +137,7 @@ const AddQuestions = () => {
         <Wrapper>
           <Form>
             <Field>
-              <Text>Add Question </Text>
+              <Text>Add questions </Text>
               <TextArea
                 value={getQues}
                 onChange={(e) => setQues(e.target.value)}
@@ -145,9 +149,7 @@ const AddQuestions = () => {
                 value={getop1}
                 onChange={(e) => setop1(e.target.value)}
               />
-              <DropdownWrap>
-                <Dropdown />
-              </DropdownWrap>
+              <DropdownWrap>{Dropdown(getval1, setval1)}</DropdownWrap>
             </Field>
             <Field>
               <Text>Option 2 </Text>
@@ -155,9 +157,7 @@ const AddQuestions = () => {
                 value={getop2}
                 onChange={(e) => setop2(e.target.value)}
               />
-              <DropdownWrap>
-                <Dropdown />
-              </DropdownWrap>
+              <DropdownWrap>{Dropdown(getval2, setval2)}</DropdownWrap>
             </Field>
             <Field>
               <Text>Option 3 </Text>
@@ -165,9 +165,7 @@ const AddQuestions = () => {
                 value={getop3}
                 onChange={(e) => setop3(e.target.value)}
               />
-              <DropdownWrap>
-                <Dropdown />
-              </DropdownWrap>
+              <DropdownWrap>{Dropdown(getval3, setval3)}</DropdownWrap>
             </Field>
             <Field>
               <Text>Option 4 </Text>
@@ -175,9 +173,7 @@ const AddQuestions = () => {
                 value={getop4}
                 onChange={(e) => setop4(e.target.value)}
               />
-              <DropdownWrap>
-                <Dropdown />
-              </DropdownWrap>
+              <DropdownWrap>{Dropdown(getval4, setval4)}</DropdownWrap>
             </Field>
           </Form>
         </Wrapper>
