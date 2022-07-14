@@ -9,18 +9,18 @@ const Button = styled.button`
   font-size: 1em;
   margin: 1em 0em;
   padding: 0.25em 1em;
-  border: 2px solid white;
+  border: 2px solid palevioletred;
   border-radius: 3px;
   &:hover {
     cursor: pointer;
-    background: papayawhip;
-    color: palevioletred;
+    background: palevioletred;
+    color: white;
   }
 `;
 
 const Parent = styled.div`
   height: 90vh;
-  background: palevioletred;
+  background: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,6 +62,7 @@ const Field = styled.div`
 
 const Text = styled.span`
   font-size: 1em;
+  font-weight: 500;
   text-align: center;
   color: palevioletred;
   display: inline-block;
