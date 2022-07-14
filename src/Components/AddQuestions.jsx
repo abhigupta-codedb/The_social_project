@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import { quiz } from "../Helper/quiz";
+import Confirmation from "../Portals/Confirmation";
 
 const Button = styled.button`
   background: white;
@@ -93,36 +94,39 @@ const AddQuestions = () => {
   const [getval2, setval2] = useState(1);
   const [getval3, setval3] = useState(1);
   const [getval4, setval4] = useState(1);
+  const [isOpen, handleOpen] = useState(false);
+  const [isOk, handleOk] = useState(false);
+
+  const newObj = {
+    question: getQues,
+    options: [
+      {
+        Text: getop1,
+        value: +getval1,
+      },
+      {
+        Text: getop2,
+        value: +getval2,
+      },
+      {
+        Text: getop3,
+        value: +getval3,
+      },
+      {
+        Text: getop4,
+        value: +getval4,
+      },
+    ],
+  };
 
   const submitHandler = () => {
     if (!getQues || !getop1 || !getop2 || !getop3 || !getop4) {
       alert("Empty field found");
     } else {
-      const newObj = {
-        question: getQues,
-        options: [
-          {
-            Text: getop1,
-            value: +getval1,
-          },
-          {
-            Text: getop2,
-            value: +getval2,
-          },
-          {
-            Text: getop3,
-            value: +getval3,
-          },
-          {
-            Text: getop4,
-            value: +getval4,
-          },
-        ],
-      };
-      quiz.push(newObj);
-      clearHandler();
+      handleOpen(true);
     }
   };
+
   const clearHandler = () => {
     setQues("");
     setop1("");
@@ -131,6 +135,20 @@ const AddQuestions = () => {
     setop4("");
   };
 
+  if (isOk) {
+    quiz.push(newObj);
+  }
+
+  if (isOpen) {
+    return (
+      <Confirmation
+        quiz={newObj}
+        isOpen={isOpen}
+        handleOk={handleOk}
+        handleOpen={handleOpen}
+      />
+    );
+  }
   //TODO: Optmize dropdown code
   return (
     <Parent>
