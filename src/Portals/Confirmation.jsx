@@ -31,6 +31,7 @@ const Wrapper = styled.div`
   height: 50vh;
   background: white;
   border: 2px solid palevioletred;
+  border-radius: 5px;
 `;
 
 const Form = styled(Wrapper)`

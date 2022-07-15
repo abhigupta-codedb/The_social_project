@@ -142,6 +142,7 @@ const AddQuestions = () => {
   if (isOk) {
     dispatch(loadQuestions([newObj]));
     handleOk(false);
+    clearHandler();
   }
 
   if (isOpen) {
