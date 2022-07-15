@@ -37,6 +37,11 @@ const Wrapper = styled.section`
   padding: 4em;
   background: papayawhip;
 `;
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 const Home = () => {
   let navigate = useNavigate();
 
@@ -45,7 +50,10 @@ const Home = () => {
       <Wrapper>
         <Title>THE_SOCIAL_PROJECT</Title>
       </Wrapper>
-      <Button onClick={() => navigate("/quiz")}>Click here!</Button>
+      <ButtonWrapper>
+        <Button onClick={() => navigate("/quiz")}>Take Quiz!</Button>
+        <Button onClick={() => navigate("/Questions")}>Add Question!</Button>
+      </ButtonWrapper>
     </ParentDiv>
   );
 };

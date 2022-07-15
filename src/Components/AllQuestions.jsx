@@ -1,8 +1,8 @@
 import React from "react";
-import { quiz } from "../Helper/quiz";
 import QuestionBox from "./QuestionBox";
 import { Button } from "./Questions";
 import styled from "styled-components";
+import { useSelector } from "react-redux/es/exports";
 
 const ButtonWrapper = styled.div`
   background: papayawhip;
@@ -13,9 +13,11 @@ const ButtonWrapper = styled.div`
 `;
 
 const AllQuestions = () => {
+  const allQuestions = useSelector((state) => state.Group1.questions);
+
   return (
     <div>
-      {quiz.map((quiz) => (
+      {allQuestions.map((quiz) => (
         <div>
           <QuestionBox quiz={quiz} />
           <ButtonWrapper>

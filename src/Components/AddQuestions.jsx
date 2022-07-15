@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-import { quiz } from "../Helper/quiz";
 import Confirmation from "../Portals/Confirmation";
+import { loadQuestions } from "../Slices/Group1";
+import { useDispatch } from "react-redux/es/exports";
 
 const Button = styled.button`
   background: white;
@@ -96,6 +97,7 @@ const AddQuestions = () => {
   const [getval4, setval4] = useState(1);
   const [isOpen, handleOpen] = useState(false);
   const [isOk, handleOk] = useState(false);
+  const dispatch = useDispatch();
 
   const newObj = {
     question: getQues,
@@ -136,7 +138,8 @@ const AddQuestions = () => {
   };
 
   if (isOk) {
-    quiz.push(newObj);
+    dispatch(loadQuestions([newObj]));
+    handleOk(false);
   }
 
   if (isOpen) {
