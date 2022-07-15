@@ -4,6 +4,7 @@ import { useState } from "react";
 import Confirmation from "../Portals/Confirmation";
 import { loadQuestions } from "../Slices/Group1";
 import { useDispatch } from "react-redux/es/exports";
+import getUid from "get-uid";
 
 const Button = styled.button`
   background: white;
@@ -100,6 +101,7 @@ const AddQuestions = () => {
   const dispatch = useDispatch();
 
   const newObj = {
+    id: getUid(),
     question: getQues,
     options: [
       {

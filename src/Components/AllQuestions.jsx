@@ -2,8 +2,9 @@ import React from "react";
 import QuestionBox from "./QuestionBox";
 import { Button } from "./Questions";
 import styled from "styled-components";
-import { useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import { Wrapper, Title } from "./QuestionBox";
+import { filterResult } from "../Slices/Group1";
 
 const ButtonWrapper = styled.div`
   background: papayawhip;
@@ -22,6 +23,12 @@ const ResultWrapper = styled.div`
 
 const AllQuestions = () => {
   const allQuestions = useSelector((state) => state.Group1.questions);
+  const dispatch = useDispatch();
+
+  const deleteHandler = (id) => {
+    const newQuestions = allQuestions.filter((question) => question.id !== id);
+    dispatch(filterResult(newQuestions));
+  };
 
   if (allQuestions.length <= 0) {
     return (
@@ -35,10 +42,10 @@ const AllQuestions = () => {
   return (
     <div>
       {allQuestions.map((quiz) => (
-        <div>
+        <div key={quiz.id}>
           <QuestionBox quiz={quiz} />
           <ButtonWrapper>
-            <Button>Delete</Button>
+            <Button onClick={() => deleteHandler(quiz.id)}>Delete</Button>
             <Button>Edit</Button>
           </ButtonWrapper>
         </div>

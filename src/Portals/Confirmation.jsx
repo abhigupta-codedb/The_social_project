@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import ReactPortal from "./ReactPortals";
+import getUid from "get-uid";
 
 const Button = styled.button`
   background: white;
@@ -83,7 +84,7 @@ const Confirmation = ({ quiz, isOpen, handleOk, handleOpen }) => {
               <QuestionText>{question}</QuestionText>
             </Field>
             {options.map((option) => (
-              <Field>
+              <Field key={getUid()}>
                 <Text>{option.Text}</Text>
                 <Text>{option.value}</Text>
               </Field>

@@ -9,9 +9,12 @@ export const Group1 = createSlice({
     loadQuestions: (state, action) => {
       state.questions = [...state.questions, ...action.payload];
     },
+    filterResult: (state, action) => {
+      state.questions = [...action.payload];
+    },
   },
 });
 
-export const { loadQuestions } = Group1.actions;
+export const { loadQuestions, filterResult } = Group1.actions;
 
 export default Group1.reducer;

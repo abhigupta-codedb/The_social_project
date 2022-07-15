@@ -1,5 +1,6 @@
 export const quiz = [
   {
+    id: 123456,
     question: "Do you feel happy?",
     options: [
       {
@@ -21,6 +22,7 @@ export const quiz = [
     ],
   },
   {
+    id: 123457,
     question: "How often you have sex?",
     options: [
       {
@@ -42,6 +44,7 @@ export const quiz = [
     ],
   },
   {
+    id: 123458,
     question: "How often you hangout with your friends?",
     options: [
       {
@@ -63,6 +66,7 @@ export const quiz = [
     ],
   },
   {
+    id: 123459,
     question: "Are you feeling/felt motivated in past week?",
     options: [
       {
