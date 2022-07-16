@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux/es/exports";
 import { loadQuestions } from "./Slices/Group1";
 import { quiz } from "./Helper/quiz";
+import Login from "./Components/Login";
 
 let dispatchFired = false;
 
@@ -25,6 +26,7 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/quiz" element={<BoxContainer />} />
       <Route path="/Questions" element={<Questions />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
