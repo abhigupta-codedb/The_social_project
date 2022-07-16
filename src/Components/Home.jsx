@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
@@ -42,11 +43,38 @@ const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+const Heading = styled.div`
+  height: 10vh;
+  width: 100%;
+  background: papayawhip;
+  position: absolute;
+  top: 0;
+  display: flex;
+  align-items: center;
+`;
+
+const WelcomeText = styled.span`
+  font-size: 1.5em;
+  text-align: center;
+  color: palevioletred;
+  margin: 5px;
+`;
+
+const LogoutButton = styled(Button)`
+  margin-left: auto;
+`;
 const Home = () => {
   let navigate = useNavigate();
-
+  const [isLogin, setLogin] = useState(true);
   return (
     <ParentDiv>
+      <Heading>
+        <WelcomeText>Hi Abhishek!</WelcomeText>
+        <LogoutButton onClick={() => setLogin(false)}>
+          {isLogin ? "Logout" : "Login"}
+        </LogoutButton>
+      </Heading>
       <Wrapper>
         <Title>THE_SOCIAL_PROJECT</Title>
       </Wrapper>
