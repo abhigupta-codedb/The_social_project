@@ -67,7 +67,7 @@ const BoxContainer = () => {
             {nextCondition ? counterValue : "Result"}
           </CounterText>
         </Counter>
-        <Logo onClick={() => navigate("/")}>
+        <Logo onClick={() => navigate("/home")}>
           <Text>{nextCondition ? "THE_SOCIAL_PROJECT" : "GO BACK"}</Text>
         </Logo>
       </Header>

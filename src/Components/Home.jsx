@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
@@ -64,9 +63,8 @@ const WelcomeText = styled.span`
 const LogoutButton = styled(Button)`
   margin-left: auto;
 `;
-const Home = () => {
+const Home = ({ isLogin, setLogin }) => {
   let navigate = useNavigate();
-  const [isLogin, setLogin] = useState(true);
   return (
     <ParentDiv>
       <Heading>

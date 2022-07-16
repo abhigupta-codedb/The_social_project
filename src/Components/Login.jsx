@@ -48,10 +48,20 @@ const Label = styled.span`
 const Input = styled.input`
   width: 50%;
 `;
-const Login = () => {
+const Login = ({ setLogin }) => {
   let navigate = useNavigate();
   const [getUsername, setUsername] = useState("");
   const [getPassword, setPassword] = useState("");
+
+  const submitHandler = () => {
+    setLogin(true);
+    navigate("/home");
+  };
+
+  const clearHandler = () => {
+    setUsername("");
+    setPassword("");
+  };
 
   return (
     <div>
@@ -75,8 +85,8 @@ const Login = () => {
             />
           </Field>
           <Field>
-            <Button>Submit</Button>
-            <Button onClick={() => navigate("/")}>Back</Button>
+            <Button onClick={submitHandler}>Submit</Button>
+            <Button onClick={clearHandler}>Clear</Button>
           </Field>
         </Wrapper>
       </Parent>

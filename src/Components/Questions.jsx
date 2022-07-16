@@ -58,7 +58,7 @@ const Questions = () => {
         <Button onClick={AddQuesHandler} primary={addQues}>
           Add questions
         </Button>
-        <BackButton onClick={() => navigate("/")}>Go back</BackButton>
+        <BackButton onClick={() => navigate("/home")}>Go back</BackButton>
       </Header>
       {addQues && <AddQuestions />}
       {viewQues && <AllQuestions />}
