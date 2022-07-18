@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux/es/exports";
+import { setUserInfo } from "../Slices/UserInfo";
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
@@ -65,11 +67,24 @@ const LogoutButton = styled(Button)`
 `;
 const Home = ({ isLogin, setLogin }) => {
   let navigate = useNavigate();
+  let dispatch = useDispatch();
+  const userName = useSelector((state) => state.UserInfo.userName);
+
+  const logoutHandler = () => {
+    //TODO: create separate Action creator files and import from their.
+    const newObj = {
+      isLoggedIn: false,
+      userName: "",
+    };
+    dispatch(setUserInfo(newObj));
+    setLogin(false);
+  };
+
   return (
     <ParentDiv>
       <Heading>
-        <WelcomeText>Hi Abhishek!</WelcomeText>
-        <LogoutButton onClick={() => setLogin(false)}>
+        <WelcomeText>Hi {userName}!</WelcomeText>
+        <LogoutButton onClick={logoutHandler}>
           {isLogin ? "Logout" : "Login"}
         </LogoutButton>
       </Heading>

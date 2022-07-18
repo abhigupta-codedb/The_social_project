@@ -3,6 +3,9 @@ import styled from "styled-components";
 import { Button } from "./Questions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { setUserInfo } from "../Slices/UserInfo";
+import { isEmpty } from "lodash";
+import { useDispatch } from "react-redux/es/exports";
 
 const Parent = styled.div`
   width: 100vw;
@@ -50,12 +53,22 @@ const Input = styled.input`
 `;
 const Login = ({ setLogin }) => {
   let navigate = useNavigate();
+  let dispatch = useDispatch();
   const [getUsername, setUsername] = useState("");
   const [getPassword, setPassword] = useState("");
 
   const submitHandler = () => {
-    setLogin(true);
-    navigate("/home");
+    if (isEmpty(getUsername) || isEmpty(getPassword)) {
+      alert("Empty fields found");
+    } else {
+      const newObj = {
+        isLoggedIn: true,
+        userName: getUsername,
+      };
+      dispatch(setUserInfo(newObj));
+      setLogin(true);
+      navigate("/home");
+    }
   };
 
   const clearHandler = () => {
@@ -73,6 +86,7 @@ const Login = ({ setLogin }) => {
           <Field>
             <Label>Enter Username</Label>
             <Input
+              type={"text"}
               value={getUsername}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -80,6 +94,7 @@ const Login = ({ setLogin }) => {
           <Field>
             <Label>Enter Password</Label>
             <Input
+              type={"password"}
               value={getPassword}
               onChange={(e) => setPassword(e.target.value)}
             />
