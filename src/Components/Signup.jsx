@@ -3,9 +3,7 @@ import styled from "styled-components";
 import { Button } from "./Questions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { setUserInfo } from "../Slices/UserInfo";
 import { isEmpty } from "lodash";
-import { useDispatch } from "react-redux/es/exports";
 
 const Parent = styled.div`
   width: 100vw;
@@ -16,24 +14,9 @@ const Parent = styled.div`
   justify-content: center;
 `;
 
-const ActionButton = styled(Button)`
-  font-size: 1em;
-  margin: 0.5em;
-  padding: 0.25em 1em;
-`;
-
-const Signup = styled.span`
-  text-decoration: underline;
-  margin: 0px 4px;
-  color: blue;
-  &:hover {
-    cursor: pointer;
-  }
-`;
-
 const Wrapper = styled.div`
   width: 30vw;
-  height: 33vh;
+  height: 35vh;
   background: white;
 `;
 
@@ -66,23 +49,37 @@ const Label = styled.span`
 const Input = styled.input`
   width: 50%;
 `;
-const Login = ({ setLogin }) => {
+
+const Select = styled.select`
+  width: 52%;
+  background: white;
+  color: gray;
+  font-size: 14px;
+  border: 1px solid black;
+  border-radius: 3px;
+
+  option {
+    color: black;
+    background: white;
+    display: flex;
+    white-space: pre;
+    min-height: 20px;
+    padding: 0px 2px 1px;
+  }
+`;
+
+const Signup = ({ setLogin }) => {
   let navigate = useNavigate();
-  let dispatch = useDispatch();
   const [getUsername, setUsername] = useState("");
   const [getPassword, setPassword] = useState("");
+  const [getRole, setRole] = useState("");
 
   const submitHandler = () => {
     if (isEmpty(getUsername) || isEmpty(getPassword)) {
       alert("Empty fields found");
     } else {
-      const newObj = {
-        isLoggedIn: true,
-        userName: getUsername,
-      };
-      dispatch(setUserInfo(newObj));
       setLogin(true);
-      navigate("/home");
+      navigate("/");
     }
   };
 
@@ -96,7 +93,7 @@ const Login = ({ setLogin }) => {
       <Parent>
         <Wrapper>
           <Heading>
-            <Text>Login</Text>
+            <Text>Sign Up</Text>
           </Heading>
           <Field>
             <Label>Enter Username</Label>
@@ -115,12 +112,15 @@ const Login = ({ setLogin }) => {
             />
           </Field>
           <Field>
-            <ActionButton onClick={submitHandler}>Submit</ActionButton>
-            <ActionButton onClick={clearHandler}>Clear</ActionButton>
+            <Label>Select Role</Label>
+            <Select value={getRole} onChange={(e) => setRole(e.target.value)}>
+              <option value={"Admin"}>Admin</option>
+              <option value={"Others"}>Others</option>
+            </Select>
           </Field>
           <Field>
-            Click here to
-            <Signup onClick={() => navigate("/signup")}> Signup</Signup>
+            <Button onClick={submitHandler}>Submit</Button>
+            <Button onClick={clearHandler}>Clear</Button>
           </Field>
         </Wrapper>
       </Parent>
@@ -128,4 +128,4 @@ const Login = ({ setLogin }) => {
   );
 };
 
-export default Login;
+export default Signup;
