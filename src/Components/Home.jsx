@@ -78,6 +78,7 @@ const Home = ({ isLogin, setLogin }) => {
     };
     dispatch(setUserInfo(newObj));
     setLogin(false);
+    navigate("/");
   };
 
   return (
