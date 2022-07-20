@@ -16,7 +16,7 @@ const Parent = styled.div`
 
 const Wrapper = styled.div`
   width: 30vw;
-  height: 35vh;
+  height: 37vh;
   background: white;
 `;
 
@@ -66,6 +66,26 @@ const Select = styled.select`
     min-height: 20px;
     padding: 0px 2px 1px;
   }
+`;
+
+const Login = styled.span`
+  text-decoration: underline;
+  margin: 0px 4px;
+  color: blue;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const ActionButton = styled(Button)`
+  font-size: 1em;
+  margin: 0.5em;
+  padding: 0.25em 1em;
+`;
+
+const CustomField = styled(Field)`
+  margin-top: ${(prop) => (prop.button ? "10px" : "0px")};
+  margin-bottom: ${(prop) => (prop.button ? "0px" : "10px")};
 `;
 
 const Signup = ({ setLogin }) => {
@@ -118,10 +138,14 @@ const Signup = ({ setLogin }) => {
               <option value={"Others"}>Others</option>
             </Select>
           </Field>
-          <Field>
-            <Button onClick={submitHandler}>Submit</Button>
-            <Button onClick={clearHandler}>Clear</Button>
-          </Field>
+          <CustomField button>
+            <ActionButton onClick={submitHandler}>Submit</ActionButton>
+            <ActionButton onClick={clearHandler}>Clear</ActionButton>
+          </CustomField>
+          <CustomField>
+            Click here to
+            <Login onClick={() => navigate("/")}>Login</Login>
+          </CustomField>
         </Wrapper>
       </Parent>
     </div>
