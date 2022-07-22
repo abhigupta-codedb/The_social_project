@@ -2,8 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import Confirmation from "../Portals/Confirmation";
-import { loadQuestions } from "../Slices/Group1";
-import { useDispatch } from "react-redux/es/exports";
 import getUid from "get-uid";
 
 const Button = styled.button`
@@ -97,8 +95,6 @@ const AddQuestions = () => {
   const [getval3, setval3] = useState(1);
   const [getval4, setval4] = useState(1);
   const [isOpen, handleOpen] = useState(false);
-  const [isOk, handleOk] = useState(false);
-  const dispatch = useDispatch();
 
   const newObj = {
     id: getUid(),
@@ -139,19 +135,13 @@ const AddQuestions = () => {
     setop4("");
   };
 
-  if (isOk) {
-    dispatch(loadQuestions([newObj]));
-    handleOk(false);
-    clearHandler();
-  }
-
   if (isOpen) {
     return (
       <Confirmation
         quiz={newObj}
         isOpen={isOpen}
-        handleOk={handleOk}
         handleOpen={handleOpen}
+        clearHandler={clearHandler}
       />
     );
   }

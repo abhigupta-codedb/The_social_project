@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import ReactPortal from "./ReactPortals";
 import getUid from "get-uid";
+import { loadQuestions } from "../Slices/Group1";
+import { useDispatch } from "react-redux/es/exports";
 
 const Button = styled.button`
   background: white;
@@ -68,10 +70,17 @@ const HeadText = styled(Text)`
   font-size: 1.5em;
 `;
 
-const Confirmation = ({ quiz, isOpen, handleOk, handleOpen }) => {
+const Confirmation = ({ quiz, isOpen, handleOpen, clearHandler }) => {
   const { question, options } = quiz;
+  const dispatch = useDispatch();
 
   if (!isOpen) return null;
+
+  const handleConfirm = () => {
+    dispatch(loadQuestions([quiz]));
+    handleOpen(false);
+    clearHandler();
+  };
 
   return (
     <ReactPortal wrapperId="react-portal-modal-container">
@@ -91,14 +100,7 @@ const Confirmation = ({ quiz, isOpen, handleOk, handleOpen }) => {
               </Field>
             ))}
           </Form>
-          <Button
-            onClick={() => {
-              handleOk(true);
-              handleOpen(false);
-            }}
-          >
-            Confirm
-          </Button>{" "}
+          <Button onClick={handleConfirm}>Confirm</Button>{" "}
           <Button
             onClick={() => {
               handleOpen(false);
