@@ -9,6 +9,7 @@ import { loadQuestions } from "./Slices/Group1";
 import { quiz } from "./Helper/quiz";
 import Login from "./Components/Login";
 import Signup from "./Components/Signup";
+import { AuthProvider } from "./contexts/AuthContext";
 
 let dispatchFired = false;
 
@@ -35,16 +36,18 @@ function App() {
   }, [isLogin, navigate, pathname]);
 
   return (
-    <Routes>
-      <Route
-        path="/home"
-        element={<Home isLogin={isLogin} setLogin={setLogin} />}
-      />
-      <Route path="/quiz" element={<BoxContainer />} />
-      <Route path="/Questions" element={<Questions />} />
-      <Route path="/" element={<Login setLogin={setLogin} />} />
-      <Route path="/signup" element={<Signup />} />
-    </Routes>
+    <AuthProvider>
+      <Routes>
+        <Route
+          path="/home"
+          element={<Home isLogin={isLogin} setLogin={setLogin} />}
+        />
+        <Route path="/quiz" element={<BoxContainer />} />
+        <Route path="/Questions" element={<Questions />} />
+        <Route path="/" element={<Login setLogin={setLogin} />} />
+        <Route path="/signup" element={<Signup setLogin={setLogin} />} />
+      </Routes>
+    </AuthProvider>
   );
 }
 

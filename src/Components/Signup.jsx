@@ -4,6 +4,7 @@ import { Button } from "./Questions";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { isEmpty } from "lodash";
+import { useAuth } from "../contexts/AuthContext";
 
 const Parent = styled.div`
   width: 100vw;
@@ -93,19 +94,28 @@ const Signup = ({ setLogin }) => {
   const [getUsername, setUsername] = useState("");
   const [getPassword, setPassword] = useState("");
   const [getRole, setRole] = useState("");
+  const { signup } = useAuth();
+  const [Error, setError] = useState();
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     if (isEmpty(getUsername) || isEmpty(getPassword)) {
       alert("Empty fields found");
     } else {
-      setLogin(true);
-      navigate("/");
+      try {
+        await signup(getUsername, getPassword);
+        setLogin(true);
+        navigate("/");
+      } catch (e) {
+        console.log("Error in Signup", e);
+        setError("Error in Signup");
+      }
     }
   };
 
   const clearHandler = () => {
     setUsername("");
     setPassword("");
+    setError("");
   };
 
   return (
@@ -115,6 +125,7 @@ const Signup = ({ setLogin }) => {
           <Heading>
             <Text>Sign Up</Text>
           </Heading>
+          {Error && <Heading>{Error}</Heading>}
           <Field>
             <Label>Enter Username</Label>
             <Input

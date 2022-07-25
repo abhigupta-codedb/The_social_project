@@ -6,6 +6,7 @@ import { useState } from "react";
 import { setUserInfo } from "../Slices/UserInfo";
 import { isEmpty } from "lodash";
 import { useDispatch } from "react-redux/es/exports";
+import { useAuth } from "../contexts/AuthContext";
 
 const Parent = styled.div`
   width: 100vw;
@@ -71,24 +72,35 @@ const Login = ({ setLogin }) => {
   let dispatch = useDispatch();
   const [getUsername, setUsername] = useState("");
   const [getPassword, setPassword] = useState("");
+  const [Error, setError] = useState();
+  const { login } = useAuth();
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     if (isEmpty(getUsername) || isEmpty(getPassword)) {
       alert("Empty fields found");
     } else {
-      const newObj = {
-        isLoggedIn: true,
-        userName: getUsername,
-      };
-      dispatch(setUserInfo(newObj));
-      setLogin(true);
-      navigate("/home");
+      await login(getUsername, getPassword)
+        .then((userCredential) => {
+          const userEmail = userCredential.user.email;
+          const newObj = {
+            isLoggedIn: true,
+            userName: userEmail,
+          };
+          dispatch(setUserInfo(newObj));
+          setLogin(true);
+          navigate("/home");
+        })
+        .catch((e) => {
+          console.log("Error in Username/Password", e);
+          setError("Error in Username/Password");
+        });
     }
   };
 
   const clearHandler = () => {
     setUsername("");
     setPassword("");
+    setError("");
   };
 
   return (
@@ -98,6 +110,7 @@ const Login = ({ setLogin }) => {
           <Heading>
             <Text>Login</Text>
           </Heading>
+          {Error && <Heading>{Error}</Heading>}
           <Field>
             <Label>Enter Username</Label>
             <Input

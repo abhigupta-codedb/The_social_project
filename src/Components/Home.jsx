@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { setUserInfo } from "../Slices/UserInfo";
+import { useAuth } from "../contexts/AuthContext";
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
@@ -69,6 +70,7 @@ const Home = ({ isLogin, setLogin }) => {
   let navigate = useNavigate();
   let dispatch = useDispatch();
   const userName = useSelector((state) => state.UserInfo.userName);
+  const { signout } = useAuth();
 
   const logoutHandler = () => {
     //TODO: create separate Action creator files and import from their.
@@ -76,9 +78,15 @@ const Home = ({ isLogin, setLogin }) => {
       isLoggedIn: false,
       userName: "",
     };
-    dispatch(setUserInfo(newObj));
-    setLogin(false);
-    navigate("/");
+    signout()
+      .then(() => {
+        dispatch(setUserInfo(newObj));
+        setLogin(false);
+        navigate("/");
+      })
+      .catch((e) => {
+        console.log("Error in signout", e);
+      });
   };
 
   return (
