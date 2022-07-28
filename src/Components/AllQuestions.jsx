@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { Wrapper, Title } from "./QuestionBox";
 import { filterResult } from "../Slices/Group1";
+import Fade from "react-reveal/Fade";
 
 const ButtonWrapper = styled.div`
   background: papayawhip;
@@ -42,13 +43,15 @@ const AllQuestions = () => {
   return (
     <div>
       {allQuestions.map((quiz) => (
-        <div key={quiz.id}>
-          <QuestionBox quiz={quiz} />
-          <ButtonWrapper>
-            <Button onClick={() => deleteHandler(quiz.id)}>Delete</Button>
-            <Button>Edit</Button>
-          </ButtonWrapper>
-        </div>
+        <Fade bottom>
+          <div key={quiz.id}>
+            <QuestionBox quiz={quiz} />
+            <ButtonWrapper>
+              <Button onClick={() => deleteHandler(quiz.id)}>Delete</Button>
+              <Button>Edit</Button>
+            </ButtonWrapper>
+          </div>
+        </Fade>
       ))}
     </div>
   );

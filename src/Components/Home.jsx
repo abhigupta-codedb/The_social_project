@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux/es/exports";
 import { setUserInfo } from "../Slices/UserInfo";
 import { useAuth } from "../contexts/AuthContext";
+import Flip from "react-reveal/Flip";
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
@@ -97,12 +98,16 @@ const Home = ({ isLogin, setLogin }) => {
           {isLogin ? "Logout" : "Login"}
         </LogoutButton>
       </Heading>
-      <Wrapper>
-        <Title>THE_SOCIAL_PROJECT</Title>
-      </Wrapper>
+      <Flip left>
+        <Wrapper>
+          <Title>THE_SOCIAL_PROJECT</Title>
+        </Wrapper>
+      </Flip>
       <ButtonWrapper>
-        <Button onClick={() => navigate("/quiz")}>Take Quiz!</Button>
-        <Button onClick={() => navigate("/Questions")}>Add Question!</Button>
+        <Flip left>
+          <Button onClick={() => navigate("/quiz")}>Take Quiz!</Button>
+          <Button onClick={() => navigate("/Questions")}>Add Question!</Button>
+        </Flip>
       </ButtonWrapper>
     </ParentDiv>
   );
